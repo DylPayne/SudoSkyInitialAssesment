@@ -2,7 +2,8 @@
 	id INT NOT NULL PRIMARY KEY IDENTITY,
 	oKey VARCHAR (30) NOT NULL,
 	oLabel VARCHAR (100) NOT NULL,
-	qId int FOREIGN KEY REFERENCES questions(id)
+	qId int FOREIGN KEY REFERENCES questions(id),
+	selections INT NOT NULL DEFAULT 0
 )
 
 INSERT INTO questionOptions (oKey, oLabel, qId)

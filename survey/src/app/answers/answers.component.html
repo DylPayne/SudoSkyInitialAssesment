@@ -1,0 +1,17 @@
+<div style="max-width: 400px">
+  <p>
+    Thanks for taking the time to participate in our survey! Here is how our
+    other applicants responded:
+  </p>
+
+  <ul>
+    <li *ngFor="let answer of answers">
+      {{ answer.label }}
+      <ul>
+        <li *ngFor="let key of answer.keys">
+          {{ key.label }} : {{ key.selections }}%
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

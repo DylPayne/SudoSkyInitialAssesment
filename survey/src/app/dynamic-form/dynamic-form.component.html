@@ -1,0 +1,24 @@
+<div style="display: flex; flex-direction: column; align-items: center">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form" class="formParent">
+    <div *ngFor="let question of questions" class="form-row">
+      <app-question [question]="question" [form]="form"></app-question>
+    </div>
+
+    <div class="form-row" style="display: flex; justify-content: center">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="payLoad" class="form-row">
+    <div class="answersParent">
+      <app-answers [answers]="answers"></app-answers>
+    </div>
+  </div>
+</div>

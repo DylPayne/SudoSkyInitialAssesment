@@ -1,0 +1,41 @@
+<div [formGroup]="form">
+  <label [attr.for]="question.key" [id]="question.key">{{
+    question.label
+  }}</label>
+  <div [ngSwitch]="question.controlType">
+    <!-- Radio -->
+    <mat-radio-group
+      aria-labelledby="question.key"
+      *ngSwitchCase="'radio'"
+      id="question.key"
+      [formControlName]="question.key"
+      class="radio-group"
+    >
+      <mat-radio-button
+        *ngFor="let option of question.options"
+        [value]="option.key"
+      >
+        {{ option.label }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <!-- Select -->
+    <div *ngSwitchCase="'select'" class="radio-group">
+      <mat-form-field>
+        <mat-label>Select...</mat-label>
+        <mat-select
+          [formControlName]="question.key"
+          id="quetion.key"
+          multiple
+          aria-labelledby="question.key"
+        >
+          <mat-option
+            *ngFor="let option of question.options"
+            [value]="option.key"
+            >{{ option.label }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <br />
+  </div>
+</div>

@@ -1,0 +1,36 @@
+﻿@page
+@model surveyBackend.Pages.Questions.IndexModel
+@{
+}
+
+<br />
+<h2>List of Questions</h2>
+<a class="btn btn-primary btm-sm" href="/Questions/Create">New Question</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Key</th>
+            <th>Label</th>
+            <th>Created At</th>
+            <th>Multiple Choice</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.listQuestions)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.qKey</td>
+                <td>@item.qLabel</td>
+                <td>@item.created_at</td>
+                <td>@item.multiple_choice.ToString()</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Questions/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Questions/Delete?id=@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

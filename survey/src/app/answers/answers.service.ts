@@ -19,11 +19,6 @@ interface AnswersLayout {
   qId: number;
   keys: { key: string; label: string; selections: number }[];
 }
-interface AnswersStatsLayout {
-  label: string;
-  qId: number;
-  keys: { key: string; label: string; percentage: number }[];
-}
 
 @Injectable()
 export class AnswersService {
@@ -96,49 +91,16 @@ export class AnswersService {
           console.log(sum);
           let i: number = 0;
           layout.keys.forEach((key) => {
-            this.answersLayout[
-              this.answersLayout.indexOf(layout)
-            ].keys[i].selections = (key.selections / sum) * 100;
+            this.answersLayout[this.answersLayout.indexOf(layout)].keys[
+              i
+            ].selections = (key.selections / sum) * 100;
             i++;
-          })
+          });
         });
       });
     });
 
     return of(this.answersLayout);
-  }
-
-  getAnswersStats(answers: AnswersLayout[]) {
-    this.getAnswers().subscribe((response) => {
-      console.log(response.length);
-    });
-    console.log('fetching answer stats!');
-    console.log(answers);
-    let answersStatsLayout: AnswersStatsLayout[] = [];
-    answers.forEach((answer) => {
-      console.log('Looping!');
-      console.log(answer);
-      let totalSelections: number = 0;
-      answer.keys.forEach((key) => {
-        totalSelections += key.selections;
-      });
-      let i: number = 0;
-      answersStatsLayout.push({
-        label: answer.label,
-        qId: answer.qId,
-        keys: [],
-      });
-      answer.keys.forEach((key) => {
-        answersStatsLayout[i].keys.push({
-          key: key.key,
-          label: key.label,
-          percentage: (key.selections / totalSelections) * 100,
-        });
-        i++;
-      });
-    });
-    console.log(answersStatsLayout);
-    return answersStatsLayout;
   }
 
   postAnswers(formAnswer: any) {

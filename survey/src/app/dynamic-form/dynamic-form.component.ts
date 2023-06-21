@@ -35,18 +35,16 @@ export class DynamicFormComponent implements OnInit {
     this.form = this.qcs.toFormGroup(
       this.questions as QuestionApiBase<string>[]
     );
+  }
+
+  onSubmit() {
+    this.payLoad = JSON.stringify(this.form.getRawValue());
+    console.log(this.form.getRawValue());
 
     this.as.getAnswers().subscribe((response: any) => {
       console.log(response);
       this.answers = response;
     });
-  }
-
-  onSubmit() {
-    this.payLoad = JSON.stringify(this.form.getRawValue());
-    // this.answers = this.as.getAnswers();
-    // console.log(this.answers);
-    console.log(this.form.getRawValue());
 
     const answersTemp = Object.entries(this.form.getRawValue());
     let answers: any[] = [];

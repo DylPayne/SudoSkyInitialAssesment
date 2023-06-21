@@ -58,6 +58,8 @@ export class QuestionApiService {
       this.http.get<Option[]>(this.oUrl).subscribe((response: Option[]) => {
         this.optionsArray = response;
 
+        console.log('hello');
+
         this.questionsArray.forEach((question: Question) => {
           let tempArray: Option[] = [];
 
@@ -89,7 +91,11 @@ export class QuestionApiService {
                 key: question.qKey,
                 label: question.qLabel,
                 options: tempArray.map((option) => {
-                  return { key: option.oKey, label: option.oLabel, id: option.id };
+                  return {
+                    key: option.oKey,
+                    label: option.oLabel,
+                    id: option.id,
+                  };
                 }),
               })
             );
@@ -99,7 +105,11 @@ export class QuestionApiService {
                 key: question.qKey,
                 label: question.qLabel,
                 options: tempArray.map((option) => {
-                  return { key: option.oKey, label: option.oLabel, id: option.id };
+                  return {
+                    key: option.oKey,
+                    label: option.oLabel,
+                    id: option.id,
+                  };
                 }),
               })
             );
@@ -125,7 +135,7 @@ export class QuestionApiService {
           {
             key: 'publicTransport',
             label: 'Easy to access by public transport',
-            id: 4
+            id: 4,
           },
           { key: 'car', label: 'Easy to access by car', id: 5 },
           { key: 'pleasant', label: 'In a pleasent area', id: 6 },
@@ -166,6 +176,6 @@ export class QuestionApiService {
 
     console.log(questionsArrayTemp);
     console.log(questionsFix);
-    return of(questionsFix);
+    return of(questionsArrayTemp);
   }
 }

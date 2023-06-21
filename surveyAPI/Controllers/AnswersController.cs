@@ -16,10 +16,15 @@ namespace surveyAPI.Controllers
     [ApiController]
     public class AnswersController : Controller
     {
+        private readonly IConfiguration Configuration;
+        public AnswersController (IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         [HttpGet]
         public string GetAllAnswers()
         {
-            SqlConnection connection = new SqlConnection("Data Source=DYLANPAYNE;Initial Catalog=survey;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(Configuration["ConnectionStrings:DevConnection"]);
             SqlCommand command = new SqlCommand("SELECT oKey, oLabel, selections, qId FROM questionOptions", connection);
             connection.Open();
             SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -32,7 +37,7 @@ namespace surveyAPI.Controllers
         [HttpPost]
         public string PostAnswers([FromBody] String[] answers)
         {
-            SqlConnection connection = new SqlConnection("Data Source=DYLANPAYNE;Initial Catalog=survey;Integrated Security=True;MultipleActiveResultSets=true");
+            SqlConnection connection = new SqlConnection(Configuration["ConnectionStrings:DevConnection"] + ";MultipleActiveResultSets=true");
             connection.Open();
             foreach (string answer in answers)
             {

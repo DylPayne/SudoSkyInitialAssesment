@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { KeyValuePipe } from '@angular/common';
+import { environment } from 'src/environments/environment.development';
 
 import { of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';

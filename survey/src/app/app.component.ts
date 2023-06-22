@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { QuestionApiBase } from './questions/question-api-base';
-import { Observable } from 'rxjs';
-
 import { QuestionApiService } from './questions/questionApi.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,9 +10,17 @@ import { QuestionApiService } from './questions/questionApi.service';
   providers: [QuestionApiService],
 })
 export class AppComponent {
-  questions$: Observable<QuestionApiBase<any>[]>;
+  questions: QuestionApiBase<string>[] = [];
+  loading: boolean = true;
 
-  constructor(service: QuestionApiService) {
-    this.questions$ = service.getQuestionOptions();
+  constructor(private service: QuestionApiService) {}
+
+  ngOnInit() {
+    console.log(this.service.getQuestionOptions());
+    this.service.getQuestionOptions().then((response) => {
+      console.log(response);
+      this.questions = response;
+      this.loading = false;
+    });
   }
 }

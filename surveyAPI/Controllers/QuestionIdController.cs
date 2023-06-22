@@ -9,11 +9,17 @@ namespace surveyAPI.Controllers
     [ApiController]
     public class QuestionIdController : Controller
     {
-        SqlConnection connection = new SqlConnection("Data Source=DYLANPAYNE;Initial Catalog=survey;Integrated Security=True");
+        private readonly IConfiguration Configuration;
+        public QuestionIdController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        
 
         [HttpGet]
         public string GetQuestionById(int id)
         {
+            SqlConnection connection = new SqlConnection(Configuration["ConnectionStrings:DevConnection"]);
             SqlCommand command = new SqlCommand("SELECT qLabel, id FROM questions WHERE id=@id", connection);
             command.Parameters.AddWithValue("@id", id);
             connection.Open();

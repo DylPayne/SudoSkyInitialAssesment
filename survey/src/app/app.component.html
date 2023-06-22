@@ -9,8 +9,10 @@
   </div>
   <br />
   <div class="formParent">
-    <app-dynamic-form [questions]="questions$ | async"></app-dynamic-form>
+    <div *ngIf="loading">Loading...</div>
+    <div *ngIf="!loading">
+      <app-dynamic-form [questions]="questions"></app-dynamic-form>
+    </div>
   </div>
   <br />
-  
 </div>

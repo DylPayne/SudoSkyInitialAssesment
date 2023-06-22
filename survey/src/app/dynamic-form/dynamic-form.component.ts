@@ -61,10 +61,5 @@ export class DynamicFormComponent implements OnInit {
     console.log(answers);
 
     this.as.postAnswers(answers);
-
-    // this.as.getAnswers().subscribe((response: any) => {
-    //   console.log(response);
-    //   this.answers = response;
-    // });
   }
 }
